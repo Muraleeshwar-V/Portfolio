@@ -1,107 +1,1094 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Muraleeshwar | Portfolio</title>
-  <link rel="icon" type="image/png" href="portfolio.png" />
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@800&display=swap" rel="stylesheet"/>
-  <link rel="stylesheet" href="style.css" />
+<meta charset="UTF-8">
+<title>Muraleeshwar V | Web Development & Cyber Security</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- =========================
+     TAILWIND CDN
+========================= -->
+<script src="https://cdn.tailwindcss.com"></script>
+
+<!-- =========================
+     GOOGLE FONTS
+========================= -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;600;700;800;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+
+<!-- =========================
+     AOS
+========================= -->
+<link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+
+<!-- =========================
+     GSAP + SCROLLTRIGGER
+========================= -->
+<script src="https://unpkg.com/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="https://unpkg.com/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+
+<!-- =========================
+     LENIS SMOOTH SCROLL
+========================= -->
+<script src="https://unpkg.com/@studio-freight/lenis@1.0.34/bundled/lenis.min.js"></script>
+
+<style>
+
+/* ================= RESET ================= */
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+html,body{
+  font-family:Inter,system-ui;
+  scroll-behavior:smooth;
+  overflow-x:hidden;
+  transition:background .4s, color .4s;
+}
+
+/* ================= THEME VARIABLES ================= */
+:root{
+  --bg:#020617;
+  --panel:#020617;
+  --glass:rgba(255,255,255,0.06);
+  --border:rgba(255,255,255,0.12);
+  --text:#e5e7eb;
+  --muted:#94a3b8;
+  --accent:#38bdf8;   /* web dev */
+  --accent2:#22c55e;  /* cyber security */
+  --shadow:0 40px 120px rgba(0,0,0,.7);
+}
+
+/* LIGHT MODE */
+.light{
+  --bg:#eef2f7;
+  --panel:#f8fafc;
+  --glass:rgba(0,0,0,0.05);
+  --border:rgba(0,0,0,0.12);
+  --text:#020617;
+  --muted:#475569;
+  --accent:#2563eb;
+  --accent2:#16a34a;
+  --shadow:0 30px 80px rgba(0,0,0,.15);
+}
+
+body{
+  background:var(--bg);
+  color:var(--text);
+}
+
+/* ================= BACKGROUND GRID ================= */
+.bg-grid{
+  position:fixed;
+  inset:0;
+  background:
+    linear-gradient(to right, rgba(255,255,255,0.03) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255,255,255,0.03) 1px, transparent 1px);
+  background-size:60px 60px;
+  z-index:-3;
+}
+
+.light .bg-grid{
+  background:
+    linear-gradient(to right, rgba(0,0,0,0.04) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(0,0,0,0.04) 1px, transparent 1px);
+}
+
+/* ================= NOISE ================= */
+.noise{
+  position:fixed;
+  inset:0;
+  background:url("https://grainy-gradients.vercel.app/noise.svg");
+  opacity:0.04;
+  z-index:-2;
+}
+
+/* ================= NAVBAR ================= */
+nav{
+  position:fixed;
+  top:24px;
+  left:50%;
+  transform:translateX(-50%);
+  z-index:1000;
+  display:flex;
+  align-items:center;
+  gap:28px;
+  padding:14px 30px;
+  border-radius:999px;
+  background:var(--glass);
+  backdrop-filter:blur(16px);
+  border:1px solid var(--border);
+  box-shadow:var(--shadow);
+}
+
+nav a{
+  font-size:12px;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  font-weight:700;
+  color:var(--muted);
+  transition:.3s;
+}
+
+nav a:hover{
+  color:var(--accent);
+}
+
+/* ================= THEME TOGGLE ================= */
+.theme-toggle{
+  margin-left:10px;
+  cursor:pointer;
+  font-size:14px;
+  padding:6px 10px;
+  border-radius:999px;
+  border:1px solid var(--border);
+}
+
+/* ================= SECTIONS BASE ================= */
+.section{
+  min-height:100vh;
+  padding:160px 8vw;
+  position:relative;
+}
+
+.section-title{
+  font-size:clamp(2.5rem,5vw,4rem);
+  font-weight:900;
+  margin-bottom:40px;
+  letter-spacing:-0.04em;
+}
+
+/* ================= BUTTONS ================= */
+.btn-primary{
+  background:linear-gradient(90deg,var(--accent),var(--accent2));
+  color:#020617;
+  padding:14px 28px;
+  border-radius:999px;
+  font-weight:800;
+  transition:.3s;
+}
+
+.btn-primary:hover{
+  transform:translateY(-4px);
+}
+
+.btn-outline{
+  border:1px solid var(--border);
+  padding:14px 28px;
+  border-radius:999px;
+  font-weight:700;
+  transition:.3s;
+}
+
+.btn-outline:hover{
+  border-color:var(--accent);
+}
+
+</style>
 </head>
+
 <body>
 
-<div class="header">
-  <div class="logo">
-    <img src="coding.png" alt="Logo">
-    <div class="site-title">Portfolio</div>
-  </div>
-  <div class="nav-links">
-    <a href="#about">About</a>
-    <a href="#projects">Projects</a>
-    <a href="#contact">Contact</a>
-    <div class="theme-toggle"></div>
-  </div>
-</div>
+<div class="bg-grid"></div>
+<div class="noise"></div>
+<!-- =========================
+     NAVBAR
+========================= -->
+<nav>
+  <a href="#home">Home</a>
+  <a href="#about">About</a>
+  <a href="#skills">Skills</a>
+  <a href="#projects">Projects</a>
+  <a href="#experience">Experience</a>
+  <a href="#contact">Contact</a>
 
-<section class="hero">
-  <div class="intro-text">
-    turning ideas into <br>
-    real life <span class="highlight">products</span> <br>
-    is my calling.
+  <!-- theme toggle -->
+  <div class="theme-toggle" id="themeToggle">
+    🌗
   </div>
-  <div class="profile-pic">
-    <img src="person.jpeg" alt="Profile Picture">
+</nav>
+
+<!-- =========================
+     HERO SECTION
+========================= -->
+<section id="home" class="section flex items-center justify-center">
+
+  <div class="max-w-6xl text-center">
+
+    <!-- identity tag -->
+    <div class="inline-block mb-6 px-6 py-2 rounded-full border border-white/10 text-xs tracking-widest"
+         data-aos="fade-down">
+      WEB DEVELOPMENT × CYBER SECURITY
+    </div>
+
+    <!-- main heading -->
+    <h1 class="text-[clamp(3.5rem,8vw,6.8rem)] font-black leading-[0.95] tracking-tight"
+        data-aos="fade-up">
+      Muraleeshwar
+      <span class="block bg-gradient-to-r from-sky-400 to-emerald-400 bg-clip-text text-transparent">
+        V
+      </span>
+    </h1>
+
+    <!-- role line -->
+    <p class="mt-6 text-lg md:text-xl text-slate-400 max-w-4xl mx-auto"
+       data-aos="fade-up" data-aos-delay="120">
+      Web Developer & Cyber Security Enthusiast focused on building
+      secure, scalable, and performance-driven web applications
+      with a strong understanding of system security.
+    </p>
+
+    <!-- CTA -->
+    <div class="mt-12 flex flex-wrap justify-center gap-6"
+         data-aos="fade-up" data-aos-delay="260">
+      <a href="#projects" class="btn-primary">
+        View Projects
+      </a>
+      <a href="RESUME.pdf" class="btn-outline">
+        View Resume
+      </a>
+    </div>
+
   </div>
+
+  <!-- scroll hint -->
+  <div class="absolute bottom-10 left-1/2 -translate-x-1/2 text-xs tracking-widest text-slate-500 animate-pulse">
+    SCROLL ↓
+  </div>
+
 </section>
+<!-- =========================
+     ABOUT SECTION
+========================= -->
+<section id="about" class="section relative">
 
-<section id="about">
-  <h2>About Me</h2>
-  <p class="about-intro">
-    I'm a Full Stack Web Developer and Cybersecurity Professional who builds secure, high-performance web apps and also tests systems for vulnerabilities through ethical hacking.
-  </p>
+  <!-- section header -->
+  <div class="mb-24">
+    <h2 class="section-title"
+        data-aos="fade-right">
+      About Me
+    </h2>
 
-  <div class="about-cards">
-    <div class="about-card">
-      <h3>Development</h3>
-      <p>
-        I work across the stack—frontend (React), backend (Node.js, JavaScript), and databases (MongoDB, MySQL). 
-        I focus on clean, scalable code and seamless user experiences.
+    <p class="max-w-3xl text-lg text-slate-400 mt-6"
+       data-aos="fade-right" data-aos-delay="120">
+      I approach software development with a strong focus on
+      <span class="text-sky-400 font-semibold">functionality</span>,
+      <span class="text-emerald-400 font-semibold">security</span>,
+      and long-term maintainability.
+    </p>
+  </div>
+
+  <!-- content layout -->
+  <div class="grid lg:grid-cols-2 gap-20 items-center">
+
+    <!-- left: narrative -->
+    <div data-aos="fade-up">
+
+      <p class="text-lg text-slate-300 leading-relaxed mb-8">
+        I am a Web Developer and Cyber Security enthusiast with hands-on experience
+        in building full-stack web applications while understanding how systems can
+        be attacked, defended, and hardened.
       </p>
-    </div>
 
-    <div class="about-card">
-      <h3>Cybersecurity</h3>
-      <p>
-        I perform penetration testing, simulate controlled attacks, and secure applications against real-world threats 
-        using tools like Burp Suite, Nmap, and Metasploit. I believe great software is both powerful and secure—and I build with that in mind.
+      <p class="text-lg text-slate-400 leading-relaxed mb-8">
+        My development mindset is deeply influenced by security principles —
+        authentication, authorization, data validation, and secure communication
+        are treated as <b>core requirements</b>, not afterthoughts.
       </p>
+
+      <p class="text-lg text-slate-400 leading-relaxed">
+        I actively explore areas such as vulnerability assessment, network security,
+        secure coding practices, and cloud security, while continuing to strengthen
+        my skills in modern web technologies and system design.
+      </p>
+
+    </div>
+
+    <!-- right: capability highlights -->
+    <div class="relative" data-aos="fade-left">
+
+      <!-- glow layers -->
+      <div class="absolute -top-10 -left-10 w-40 h-40 bg-sky-400/20 blur-3xl"></div>
+      <div class="absolute -bottom-10 -right-10 w-40 h-40 bg-emerald-400/20 blur-3xl"></div>
+
+      <!-- glass card -->
+      <div class="relative p-10 rounded-3xl bg-white/5 border border-white/10 backdrop-blur-xl shadow-xl">
+
+        <ul class="space-y-6 text-slate-300">
+
+          <li class="flex items-start gap-4">
+            <span class="text-sky-400">▹</span>
+            <span>Strong foundation in <b>HTML, CSS, JavaScript</b> & backend basics</span>
+          </li>
+
+          <li class="flex items-start gap-4">
+            <span class="text-emerald-400">▹</span>
+            <span>Understanding of <b>Cyber Security fundamentals</b> & attack surfaces</span>
+          </li>
+
+          <li class="flex items-start gap-4">
+            <span class="text-sky-400">▹</span>
+            <span>Experience with <b>secure authentication</b> & data handling</span>
+          </li>
+
+          <li class="flex items-start gap-4">
+            <span class="text-emerald-400">▹</span>
+            <span>Interest in <b>network security</b>, <b>cloud security</b>, and system hardening</span>
+          </li>
+
+        </ul>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+<!-- =========================
+     SKILLS SECTION
+========================= -->
+<section id="skills" class="section relative overflow-hidden">
+
+  <!-- background accents -->
+  <div class="absolute -top-40 left-0 w-[600px] h-[600px] bg-sky-400/10 blur-[160px]"></div>
+  <div class="absolute -bottom-40 right-0 w-[600px] h-[600px] bg-emerald-400/10 blur-[160px]"></div>
+
+  <!-- heading -->
+  <div class="mb-28 relative z-10">
+    <h2 class="section-title"
+        data-aos="fade-up">
+      Skills
+    </h2>
+
+    <p class="max-w-3xl text-slate-400 text-lg mt-6"
+       data-aos="fade-up" data-aos-delay="120">
+      A balanced technical skillset combining modern web development
+      practices with core cyber security knowledge and tooling.
+    </p>
+  </div>
+
+  <!-- =========================
+       WEB DEVELOPMENT SKILLS
+  ========================= -->
+  <div class="mb-36 relative z-10">
+
+    <h3 class="text-2xl font-bold mb-10 text-sky-400"
+        data-aos="fade-right">
+      Web Development
+    </h3>
+
+    <div class="grid lg:grid-cols-2 gap-20 items-start">
+
+      <!-- narrative -->
+      <div data-aos="fade-right">
+        <p class="text-slate-400 leading-relaxed mb-10">
+          Focused on building responsive, scalable, and user-centric
+          web applications using modern frontend and backend technologies.
+        </p>
+
+        <div class="space-y-8">
+
+          <!-- HTML/CSS -->
+          <div>
+            <div class="flex justify-between text-sm mb-2">
+              <span>HTML / CSS</span>
+              <span class="text-slate-500">Advanced</span>
+            </div>
+            <div class="h-2 bg-white/10 rounded-full overflow-hidden">
+              <div class="skill-bar h-full w-[0%] bg-gradient-to-r from-sky-400 to-blue-500 rounded-full"
+                   data-width="90"></div>
+            </div>
+          </div>
+
+          <!-- JavaScript -->
+          <div>
+            <div class="flex justify-between text-sm mb-2">
+              <span>JavaScript</span>
+              <span class="text-slate-500">Intermediate</span>
+            </div>
+            <div class="h-2 bg-white/10 rounded-full overflow-hidden">
+              <div class="skill-bar h-full w-[0%] bg-gradient-to-r from-sky-400 to-blue-500 rounded-full"
+                   data-width="80"></div>
+            </div>
+          </div>
+
+          <!-- Backend -->
+          <div>
+            <div class="flex justify-between text-sm mb-2">
+              <span>Backend Basics (MySQL, APIs)</span>
+              <span class="text-slate-500">Intermediate</span>
+            </div>
+            <div class="h-2 bg-white/10 rounded-full overflow-hidden">
+              <div class="skill-bar h-full w-[0%] bg-gradient-to-r from-sky-400 to-blue-500 rounded-full"
+                   data-width="75"></div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- floating tags -->
+      <div class="relative" data-aos="fade-left">
+        <div class="absolute top-0 left-0 px-5 py-3 rounded-full bg-white/5 border border-white/10 backdrop-blur-xl">
+          Frontend
+        </div>
+        <div class="absolute top-24 right-0 px-5 py-3 rounded-full bg-white/5 border border-white/10 backdrop-blur-xl">
+          Backend
+        </div>
+        <div class="absolute bottom-0 left-24 px-5 py-3 rounded-full bg-white/5 border border-white/10 backdrop-blur-xl">
+          Responsive UI
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- =========================
+       CYBER SECURITY SKILLS
+  ========================= -->
+  <div class="relative z-10">
+
+    <h3 class="text-2xl font-bold mb-10 text-emerald-400"
+        data-aos="fade-right">
+      Cyber Security
+    </h3>
+
+    <div class="grid lg:grid-cols-2 gap-20 items-start">
+
+      <!-- narrative -->
+      <div data-aos="fade-right">
+        <p class="text-slate-400 leading-relaxed mb-10">
+          Practical understanding of cyber security concepts, attack vectors,
+          and defensive mechanisms applied to real systems and networks.
+        </p>
+
+        <div class="space-y-8">
+
+          <!-- Security Fundamentals -->
+          <div>
+            <div class="flex justify-between text-sm mb-2">
+              <span>Security Fundamentals</span>
+              <span class="text-slate-500">Intermediate</span>
+            </div>
+            <div class="h-2 bg-white/10 rounded-full overflow-hidden">
+              <div class="skill-bar h-full w-[0%] bg-gradient-to-r from-emerald-400 to-green-500 rounded-full"
+                   data-width="78"></div>
+            </div>
+          </div>
+
+          <!-- Network Security -->
+          <div>
+            <div class="flex justify-between text-sm mb-2">
+              <span>Network Security</span>
+              <span class="text-slate-500">Intermediate</span>
+            </div>
+            <div class="h-2 bg-white/10 rounded-full overflow-hidden">
+              <div class="skill-bar h-full w-[0%] bg-gradient-to-r from-emerald-400 to-green-500 rounded-full"
+                   data-width="72"></div>
+            </div>
+          </div>
+
+          <!-- Secure Coding -->
+          <div>
+            <div class="flex justify-between text-sm mb-2">
+              <span>Secure Coding Practices</span>
+              <span class="text-slate-500">Intermediate</span>
+            </div>
+            <div class="h-2 bg-white/10 rounded-full overflow-hidden">
+              <div class="skill-bar h-full w-[0%] bg-gradient-to-r from-emerald-400 to-green-500 rounded-full"
+                   data-width="75"></div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- floating tags -->
+      <div class="relative" data-aos="fade-left">
+        <div class="absolute top-0 left-0 px-5 py-3 rounded-full bg-white/5 border border-white/10 backdrop-blur-xl">
+          Vulnerability Analysis
+        </div>
+        <div class="absolute top-24 right-0 px-5 py-3 rounded-full bg-white/5 border border-white/10 backdrop-blur-xl">
+          Network Defense
+        </div>
+        <div class="absolute bottom-0 left-24 px-5 py-3 rounded-full bg-white/5 border border-white/10 backdrop-blur-xl">
+          Secure Systems
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+<!-- =========================
+     PROJECTS SECTION
+========================= -->
+<section id="projects" class="section relative overflow-hidden">
+
+  <!-- background accents -->
+  <div class="absolute -top-32 right-0 w-[600px] h-[600px] bg-sky-400/10 blur-[160px]"></div>
+  <div class="absolute -bottom-32 left-0 w-[600px] h-[600px] bg-emerald-400/10 blur-[160px]"></div>
+
+  <!-- heading -->
+  <div class="mb-32 relative z-10">
+    <h2 class="section-title"
+        data-aos="fade-up">
+      Projects
+    </h2>
+
+    <p class="max-w-3xl text-slate-400 text-lg mt-6"
+       data-aos="fade-up" data-aos-delay="120">
+      A selection of projects demonstrating full-stack development,
+      system design, and cyber security awareness applied to real problems.
+    </p>
+  </div>
+
+  <!-- =========================
+       PROJECT 1 – WEB DEVELOPMENT
+  ========================= -->
+  <div class="grid lg:grid-cols-2 gap-24 items-center mb-40">
+
+    <div data-aos="fade-right">
+      <span class="text-xs tracking-widest text-sky-400">WEB DEVELOPMENT</span>
+
+      <h3 class="text-3xl font-bold mt-4 mb-6">
+        User Management System
+      </h3>
+
+      <p class="text-slate-300 leading-relaxed mb-6">
+        A full-stack web application designed to handle user registration,
+        authentication, authorization, and profile management with a focus
+        on clean architecture and secure data handling.
+      </p>
+
+      <ul class="space-y-4 text-slate-400 mb-8">
+        <li>▹ Implemented CRUD operations with structured backend logic</li>
+        <li>▹ Designed authentication flows with validation & access control</li>
+        <li>▹ Integrated database operations using MySQL</li>
+        <li>▹ Ensured input sanitization and error handling</li>
+      </ul>
+
+      <div class="flex flex-wrap gap-4">
+        <span class="px-4 py-2 rounded-full bg-white/5 border border-white/10">HTML</span>
+        <span class="px-4 py-2 rounded-full bg-white/5 border border-white/10">CSS</span>
+        <span class="px-4 py-2 rounded-full bg-white/5 border border-white/10">JavaScript</span>
+        <span class="px-4 py-2 rounded-full bg-white/5 border border-white/10">MySQL</span>
+      </div>
+    </div>
+
+    <div data-aos="fade-left" class="relative">
+      <div class="absolute inset-0 rounded-3xl bg-gradient-to-br from-sky-400/20 to-blue-500/20 blur-3xl"></div>
+      <div class="relative h-[380px] rounded-3xl border border-white/10 bg-white/5 backdrop-blur-xl flex items-center justify-center text-slate-500">
+        AUTH FLOW • DATABASE • UI
+      </div>
+    </div>
+
+  </div>
+
+  <!-- =========================
+       PROJECT 2 – CYBER SECURITY
+  ========================= -->
+  <div class="grid lg:grid-cols-2 gap-24 items-center mb-40">
+
+    <div data-aos="fade-right" class="relative order-2 lg:order-1">
+      <div class="absolute inset-0 rounded-3xl bg-gradient-to-br from-emerald-400/20 to-green-500/20 blur-3xl"></div>
+      <div class="relative h-[380px] rounded-3xl border border-white/10 bg-white/5 backdrop-blur-xl flex items-center justify-center text-slate-500">
+        NETWORK • VULNERABILITY • DEFENSE
+      </div>
+    </div>
+
+    <div data-aos="fade-left" class="order-1 lg:order-2">
+      <span class="text-xs tracking-widest text-emerald-400">CYBER SECURITY</span>
+
+      <h3 class="text-3xl font-bold mt-4 mb-6">
+        Vulnerability Assessment & System Analysis
+      </h3>
+
+      <p class="text-slate-300 leading-relaxed mb-6">
+        Practical exploration of system vulnerabilities by analyzing
+        network configurations, identifying security gaps, and
+        understanding common attack vectors.
+      </p>
+
+      <ul class="space-y-4 text-slate-400 mb-8">
+        <li>▹ Studied common vulnerabilities and misconfigurations</li>
+        <li>▹ Performed basic vulnerability scanning and analysis</li>
+        <li>▹ Analyzed risks related to insecure authentication & access</li>
+        <li>▹ Documented findings and mitigation approaches</li>
+      </ul>
+
+      <div class="flex flex-wrap gap-4">
+        <span class="px-4 py-2 rounded-full bg-white/5 border border-white/10">Network Security</span>
+        <span class="px-4 py-2 rounded-full bg-white/5 border border-white/10">VAPT Basics</span>
+        <span class="px-4 py-2 rounded-full bg-white/5 border border-white/10">System Security</span>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- =========================
+       PROJECT 3 – COMBINED
+  ========================= -->
+  <div class="grid lg:grid-cols-2 gap-24 items-center">
+
+    <div data-aos="fade-right">
+      <span class="text-xs tracking-widest text-violet-400">
+        WEB + SECURITY
+      </span>
+
+      <h3 class="text-3xl font-bold mt-4 mb-6">
+        Secure Web Application Architecture
+      </h3>
+
+      <p class="text-slate-300 leading-relaxed mb-6">
+        Designed a conceptual secure web architecture that integrates
+        secure coding practices with backend logic, authentication
+        mechanisms, and basic threat modeling.
+      </p>
+
+      <ul class="space-y-4 text-slate-400 mb-8">
+        <li>▹ Applied secure coding principles in application design</li>
+        <li>▹ Considered threats such as injection & unauthorized access</li>
+        <li>▹ Designed layered security approach</li>
+        <li>▹ Balanced usability with protection</li>
+      </ul>
+
+      <div class="flex flex-wrap gap-4">
+        <span class="px-4 py-2 rounded-full bg-white/5 border border-white/10">Secure Design</span>
+        <span class="px-4 py-2 rounded-full bg-white/5 border border-white/10">Auth Systems</span>
+        <span class="px-4 py-2 rounded-full bg-white/5 border border-white/10">Threat Modeling</span>
+      </div>
+    </div>
+
+    <div data-aos="fade-left" class="relative">
+      <div class="absolute inset-0 rounded-3xl bg-gradient-to-br from-violet-400/20 to-sky-400/20 blur-3xl"></div>
+      <div class="relative h-[380px] rounded-3xl border border-white/10 bg-white/5 backdrop-blur-xl flex items-center justify-center text-slate-500">
+        ARCHITECTURE • SECURITY • FLOW
+      </div>
+    </div>
+
+  </div>
+
+</section>
+<!-- =========================
+     EXPERIENCE SECTION
+========================= -->
+<section id="experience" class="section relative overflow-hidden">
+
+  <!-- background accents -->
+  <div class="absolute -top-40 left-0 w-[600px] h-[600px] bg-sky-400/10 blur-[160px]"></div>
+  <div class="absolute -bottom-40 right-0 w-[600px] h-[600px] bg-emerald-400/10 blur-[160px]"></div>
+
+  <!-- heading -->
+  <div class="mb-28 relative z-10">
+    <h2 class="section-title"
+        data-aos="fade-up">
+      Experience
+    </h2>
+
+    <p class="max-w-3xl text-slate-400 text-lg mt-6"
+       data-aos="fade-up" data-aos-delay="120">
+      Industry exposure through internships and academic projects,
+      applying both development and security principles in real environments.
+    </p>
+  </div>
+
+  <!-- TIMELINE -->
+  <div class="relative border-l border-white/10 pl-14 space-y-32">
+
+    <!-- EXPERIENCE 1 -->
+    <div class="relative" data-aos="fade-right">
+
+      <!-- timeline dot -->
+      <div class="absolute -left-[34px] top-1 w-4 h-4 rounded-full bg-sky-400 shadow-lg"></div>
+
+      <span class="text-xs tracking-widest text-sky-400">
+        2024 – PRESENT
+      </span>
+
+      <h3 class="text-2xl font-bold mt-4">
+        Cyber Security Analyst & Cloud Architect Intern
+      </h3>
+
+      <p class="text-slate-400 mt-2 mb-6">
+        CopterCode
+      </p>
+
+      <ul class="space-y-4 text-slate-300 leading-relaxed max-w-3xl">
+        <li>
+          ▹ Observed and assisted in <b>vulnerability assessment</b>,
+          cloud security configurations, and system hardening processes.
+        </li>
+        <li>
+          ▹ Analyzed potential attack surfaces in web and cloud-based systems,
+          understanding real-world threat models.
+        </li>
+        <li>
+          ▹ Gained exposure to secure infrastructure design and
+          defensive security strategies.
+        </li>
+      </ul>
+
+    </div>
+
+    <!-- EXPERIENCE 2 -->
+    <div class="relative" data-aos="fade-left">
+
+      <!-- timeline dot -->
+      <div class="absolute -left-[34px] top-1 w-4 h-4 rounded-full bg-emerald-400 shadow-lg"></div>
+
+      <span class="text-xs tracking-widest text-emerald-400">
+        2023 – 2024
+      </span>
+
+      <h3 class="text-2xl font-bold mt-4">
+        Full-Stack / Web Development Intern
+      </h3>
+
+      <p class="text-slate-400 mt-2 mb-6">
+        Academic & Internship Projects
+      </p>
+
+      <ul class="space-y-4 text-slate-300 leading-relaxed max-w-3xl">
+        <li>
+          ▹ Built and maintained responsive web applications using
+          <b>HTML, CSS, JavaScript</b> and backend integrations.
+        </li>
+        <li>
+          ▹ Implemented user authentication, database connectivity,
+          and CRUD operations.
+        </li>
+        <li>
+          ▹ Applied secure coding practices to minimize common
+          web vulnerabilities.
+        </li>
+      </ul>
+
+    </div>
+
+  </div>
+
+</section>
+<!-- =========================
+     CERTIFICATIONS & ACHIEVEMENTS
+========================= -->
+<section id="certifications" class="section relative overflow-hidden">
+
+  <!-- background accent -->
+  <div class="absolute inset-0 pointer-events-none">
+    <div class="absolute top-1/3 left-1/4 w-[500px] h-[500px] bg-violet-400/10 blur-[160px]"></div>
+  </div>
+
+  <!-- heading -->
+  <div class="mb-28 relative z-10">
+    <h2 class="section-title"
+        data-aos="fade-up">
+      Certifications & Learning
+    </h2>
+
+    <p class="max-w-3xl text-slate-400 text-lg mt-6"
+       data-aos="fade-up" data-aos-delay="120">
+      Continuous learning through workshops, certifications, and
+      hands-on technical training in both cyber security and development.
+    </p>
+  </div>
+
+  <!-- CONTENT GRID -->
+  <div class="grid lg:grid-cols-2 gap-24 relative z-10">
+
+    <!-- CYBER SECURITY -->
+    <div data-aos="fade-right">
+      <span class="text-xs tracking-widest text-emerald-400">
+        CYBER SECURITY
+      </span>
+
+      <h3 class="text-2xl font-bold mt-4 mb-8">
+        Security Training & Workshops
+      </h3>
+
+      <ul class="space-y-6 text-slate-300 leading-relaxed">
+        <li>
+          ▹ Participated in <b>Ethical Hacking & Cyber Security Workshop</b>
+          conducted by VaultofCodes.
+        </li>
+        <li>
+          ▹ Observed real-world demonstrations of password cracking,
+          website security flaws, and Wi-Fi security concepts.
+        </li>
+        <li>
+          ▹ Gained exposure to tools such as <b>Kali Linux</b>
+          and common penetration testing methodologies.
+        </li>
+        <li>
+          ▹ Understood cyber attack lifecycles and defensive measures
+          used in modern systems.
+        </li>
+      </ul>
+    </div>
+
+    <!-- WEB DEVELOPMENT -->
+    <div data-aos="fade-left">
+      <span class="text-xs tracking-widest text-sky-400">
+        WEB DEVELOPMENT
+      </span>
+
+      <h3 class="text-2xl font-bold mt-4 mb-8">
+        Development & Technical Training
+      </h3>
+
+      <ul class="space-y-6 text-slate-300 leading-relaxed">
+        <li>
+          ▹ Completed training in <b>Full-Stack Web Development</b>
+          with hands-on project implementation.
+        </li>
+        <li>
+          ▹ Worked on frontend and backend integration
+          using modern development workflows.
+        </li>
+        <li>
+          ▹ Applied structured coding practices and
+          database-driven application design.
+        </li>
+        <li>
+          ▹ Recognized for consistent academic performance
+          and active technical participation.
+        </li>
+      </ul>
+    </div>
+
+  </div>
+
+  <!-- ACHIEVEMENT STRIP -->
+  <div class="mt-32 relative z-10"
+       data-aos="fade-up">
+
+    <div class="flex flex-wrap justify-center gap-6 text-sm tracking-widest text-slate-400">
+
+      <span class="px-6 py-3 rounded-full border border-white/10 bg-white/5">
+        CGPA 8.6
+      </span>
+
+      <span class="px-6 py-3 rounded-full border border-white/10 bg-white/5">
+        Internship Experience
+      </span>
+
+      <span class="px-6 py-3 rounded-full border border-white/10 bg-white/5">
+        Secure Coding Mindset
+      </span>
+
+      <span class="px-6 py-3 rounded-full border border-white/10 bg-white/5">
+        Continuous Learner
+      </span>
+
+    </div>
+
+  </div>
+
+</section>
+<!-- =========================
+     CONTACT SECTION
+========================= -->
+<section id="contact" class="section relative overflow-hidden">
+
+  <!-- glow -->
+  <div class="absolute inset-0 pointer-events-none">
+    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2
+                w-[900px] h-[900px] rounded-full
+                bg-gradient-to-br from-sky-400/10 to-emerald-400/10 blur-[180px]">
     </div>
   </div>
+
+  <div class="relative z-10 max-w-5xl mx-auto text-center">
+
+    <h2 class="section-title" data-aos="fade-up">
+      Contact
+    </h2>
+
+    <p class="text-lg text-slate-400 mt-6 mb-20 max-w-3xl mx-auto"
+       data-aos="fade-up" data-aos-delay="120">
+      Open to opportunities, collaborations, and conversations
+      around secure systems, web development, and cyber security.
+    </p>
+
+    <!-- CONTACT OPTIONS -->
+    <div class="grid md:grid-cols-3 gap-10">
+
+      <!-- EMAIL -->
+      <a href="mailto:yourmail@example.com"
+         class="group relative p-12 rounded-3xl border border-white/10 bg-white/5
+                backdrop-blur-xl transition-all duration-500 hover:-translate-y-4"
+         data-aos="fade-up">
+
+        <div class="absolute inset-0 rounded-3xl
+                    bg-gradient-to-br from-sky-400/20 to-blue-500/20
+                    opacity-0 group-hover:opacity-100 transition"></div>
+
+        <div class="relative z-10">
+          <div class="text-4xl mb-6">📧</div>
+          <h3 class="text-xl font-bold mb-2">Email</h3>
+          <p class="text-slate-400 text-sm">
+            yourmail@example.com
+          </p>
+        </div>
+      </a>
+
+      <!-- LINKEDIN -->
+      <a href="#"
+         class="group relative p-12 rounded-3xl border border-white/10 bg-white/5
+                backdrop-blur-xl transition-all duration-500 hover:-translate-y-4"
+         data-aos="fade-up" data-aos-delay="120">
+
+        <div class="absolute inset-0 rounded-3xl
+                    bg-gradient-to-br from-emerald-400/20 to-green-500/20
+                    opacity-0 group-hover:opacity-100 transition"></div>
+
+        <div class="relative z-10">
+          <div class="text-4xl mb-6">💼</div>
+          <h3 class="text-xl font-bold mb-2">LinkedIn</h3>
+          <p class="text-slate-400 text-sm">
+            Professional profile
+          </p>
+        </div>
+      </a>
+
+      <!-- GITHUB -->
+      <a href="#"
+         class="group relative p-12 rounded-3xl border border-white/10 bg-white/5
+                backdrop-blur-xl transition-all duration-500 hover:-translate-y-4"
+         data-aos="fade-up" data-aos-delay="240">
+
+        <div class="absolute inset-0 rounded-3xl
+                    bg-gradient-to-br from-violet-400/20 to-sky-400/20
+                    opacity-0 group-hover:opacity-100 transition"></div>
+
+        <div class="relative z-10">
+          <div class="text-4xl mb-6">💻</div>
+          <h3 class="text-xl font-bold mb-2">GitHub</h3>
+          <p class="text-slate-400 text-sm">
+            Code & projects
+          </p>
+        </div>
+      </a>
+
+    </div>
+
+    <!-- FOOTER -->
+    <p class="mt-28 text-sm tracking-widest text-slate-500">
+      © 2025 • Muraleeshwar V • Web Development × Cyber Security
+    </p>
+
+  </div>
+
 </section>
 
-<section id="projects">
-  <h2>Projects</h2>
-  <div class="project-container">
-    <div class="project-card">
-      <h3>HR SYSTEM</h3>
-      <p>A fully-featured internal HR system handling employee data, leave tracking, payroll etc. Built with PHP, Node.js, MySql.</p>
-    </div>
-    <div class="project-card">
-      <h3>PAYMENT GATEWAYS</h3>
-      <p>Integrated Phonepe and Stripe into e-commerce platforms with OTP flows, token-based security, and error handling.</p>
-    </div>
-    <div class="project-card">
-      <h3>PENTESTING</h3>
-      <p>Performed penetration testing on web apps to find and mitigate XSS, SQL Injection. Provided detailed reports.</p>
-    </div>
-  </div>
-</section>
+<!-- =========================
+     SCRIPTS
+========================= -->
 
-<section id="contact">
-  <h2>Contact</h2>
-  <div class="contact-line">
-    <span><strong>Phone:</strong> +91 9345268158</span>
-    <span class="separator">|</span>
-    <span><strong>Email:</strong> muraleeshwarech@gmail.com</span>
-    <span class="separator">|</span>
-    <span><strong>Address:</strong> 8/125, SETHUNAGAR,RAMANATHAPURAM-623504</span>
-  </div>
-  <div class="contact-icons">
-    <a href="https://www.instagram.com/muraleeshwar04" target="_blank" class="icon">
-      <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/instagram.svg/" alt="Instagram">
-    </a>
-    <a href="https://www.linkedin.com/in/muraleeshwar-v-069812329" target="_blank" class="icon">
-      <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/linkedin.svg/" alt="LinkedIn">
-    </a>
-    <a href="https://youtube.com" target="_blank" class="icon">
-      <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/youtube.svg" alt="YouTube">
-    </a>
-    <a href="https://muraleeshwar-v.github.io/Portfolio" target="_blank" class="icon">
-      <img src="https://muraleeshwar-v.github.io/Portfolio/" alt="Website">
-    </a>
-  </div>
-</section>
+<script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
 
-<script src="script.js"></script>
+<script>
+/* ================= AOS ================= */
+AOS.init({
+  once:false,
+  duration:1000,
+  easing:"ease-out-cubic"
+});
+
+/* ================= LENIS ================= */
+const lenis = new Lenis({
+  smooth:true,
+  lerp:0.08
+});
+function raf(time){
+  lenis.raf(time);
+  requestAnimationFrame(raf);
+}
+requestAnimationFrame(raf);
+
+/* ================= GSAP ================= */
+gsap.registerPlugin(ScrollTrigger);
+
+/* SECTION TITLES */
+gsap.utils.toArray(".section-title").forEach(title=>{
+  gsap.from(title,{
+    scrollTrigger:{trigger:title,start:"top 85%"},
+    y:80,opacity:0,duration:1.2,ease:"power4.out"
+  });
+});
+
+/* SKILL BARS */
+gsap.utils.toArray(".skill-bar").forEach(bar=>{
+  const w = bar.dataset.width;
+  gsap.to(bar,{
+    scrollTrigger:{trigger:bar,start:"top 90%"},
+    width:w+"%",
+    duration:1.5,
+    ease:"power3.out"
+  });
+});
+
+/* PARALLAX BLOCKS */
+gsap.utils.toArray("#projects .relative").forEach(el=>{
+  gsap.from(el,{
+    scrollTrigger:{trigger:el,start:"top 90%",scrub:true},
+    y:100,opacity:0
+  });
+});
+
+/* NAV ACTIVE STATE */
+const sections = document.querySelectorAll("section");
+const navLinks = document.querySelectorAll("nav a");
+
+window.addEventListener("scroll",()=>{
+  let current="";
+  sections.forEach(sec=>{
+    if(pageYOffset>=sec.offsetTop-300){
+      current=sec.id;
+    }
+  });
+  navLinks.forEach(a=>{
+    a.classList.remove("text-sky-400");
+    if(a.getAttribute("href")==="#"+current){
+      a.classList.add("text-sky-400");
+    }
+  });
+});
+
+/* ================= DARK / LIGHT MODE ================= */
+const toggle=document.getElementById("themeToggle");
+toggle.addEventListener("click",()=>{
+  document.body.classList.toggle("light");
+  localStorage.setItem("theme",
+    document.body.classList.contains("light")?"light":"dark");
+});
+
+if(localStorage.getItem("theme")==="light"){
+  document.body.classList.add("light");
+}
+
+/* ================= CURSOR GLOW ================= */
+const glow=document.createElement("div");
+glow.style.cssText=`
+position:fixed;
+width:300px;height:300px;
+border-radius:50%;
+pointer-events:none;
+background:radial-gradient(circle,
+rgba(56,189,248,.15),transparent 70%);
+transform:translate(-50%,-50%);
+z-index:0;`;
+document.body.appendChild(glow);
+
+window.addEventListener("mousemove",e=>{
+  glow.style.left=e.clientX+"px";
+  glow.style.top=e.clientY+"px";
+});
+</script>
+
 </body>
 </html>
